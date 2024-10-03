@@ -1,34 +1,54 @@
 
-const container = document.getElementById("container")
+const chatContainer = document.getElementById("chatcontainer");
+const input1 = document.getElementById("input1");
 
-function renderPhrases(list) {
-    container.innerHTML = ""
-    for(let i = 0; i < list.length; i++) {
-        const phrase = list[i]
-        container.innerHTML += `
-        <div class="quote-item">
-            <input type="checkbox">
-            <p>${phrase}</p>
-        </div>
-        `
+const input2 = document.getElementById("input2");
+
+
+let messages1 = [];
+
+let messages2 = [];
+
+
+function renderMessages() {
+    chatContainer.innerHTML = ""; 
+    
+   
+    for (let i = 0; i < messages1.length; i++) {
+
+        const chat = messages1[i];
+        chatContainer.innerHTML += `
+        <div class="message1">${chat}</div>`;
+    }
+    
+   
+    for (let i = 0; i < messages2.length; i++) {
+        const chat = messages2[i];
+
+
+        chatContainer.innerHTML += `
+        <div class="message2">${chat}</div>`;
+    }
+
+
+}
+
+
+function addMessage1() {
+    const message = input1.value;
+    if (message !== "") {
+        messages1.push(message);
+        input1.value = "";
+        renderMessages();
     }
 }
 
-function search() {
-    const input = document.getElementById("input")
-    const value = input.value
-    if(value === "") {
-        renderPhrases(moviePhrases)
-    } else {
-        let list = []
-        for(let i = 0; i < moviePhrases.length; i++) {
-            const phrase = moviePhrases[i]
-            if(phrase.includes(value)) {
-                list.push(phrase)
-            }
-        }
-        renderPhrases(list)
-        }
-    }
 
-renderPhrases()
+function addMessage2() {
+    const message = input2.value;
+    if (message !== "") {
+        messages2.push(message);
+        input2.value = ""; 
+        renderMessages(); 
+    }
+}
